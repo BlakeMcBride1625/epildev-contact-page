@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=production
+      - VITE_API_URL=https://8bp.epildevconnect.uk
+    networks:
+      - epildev-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=production
+      - PORT=${localhost_be:-1002}
+      - LOCALHOST_BE=${localhost_be:-1002}
+      - LOCALHOST_FE=${localhost_fe:-1001}
+      - FRONTEND_URL=https://8bp.epildevconnect.uk
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+    networks:
+      - epildev-network
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/ssl:/etc/nginx/ssl
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - epildev-network
+
+networks:
+  epildev-network:
+    driver: bridge
+
+volumes:
+  data:
+
+
