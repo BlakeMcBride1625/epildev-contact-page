@@ -80,7 +80,7 @@ epildev-contact-page/
 │   │   ├── services/       # Business logic
 │   │   └── utils/          # Utilities
 │   └── package.json
-├── nginx/                  # Nginx configuration
+<!-- Nginx configuration removed; now using Cloudflare -->
 ├── docker-compose.yml      # Docker services
 └── README.md
 ```

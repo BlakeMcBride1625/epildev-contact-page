@@ -52,10 +52,7 @@ docker-compose down
 ## 🌐 Production Deployment
 
 ### Domain Configuration
-- **Target URL**: https://8bp.epildevconnect.uk/contact
-- **Frontend**: Serves the React application
-- **Backend**: Handles API requests and email sending
-- **Nginx**: Reverse proxy with SSL termination
+**Cloudflare**: Handles reverse proxy and SSL termination
 
 ### Cloudflare Setup
 
@@ -98,9 +95,7 @@ docker-compose down
 # Generate SSL certificates (Let's Encrypt)
 sudo certbot certonly --standalone -d 8bp.epildevconnect.uk
 
-# Copy certificates to nginx directory
-sudo cp /etc/letsencrypt/live/8bp.epildevconnect.uk/fullchain.pem nginx/ssl/cert.pem
-sudo cp /etc/letsencrypt/live/8bp.epildevconnect.uk/privkey.pem nginx/ssl/key.pem
+# SSL certificates are managed by Cloudflare
 ```
 
 ## 📧 Email Configuration
@@ -157,8 +152,8 @@ docker-compose ps
 # View application logs
 docker-compose logs -f backend
 
-# View nginx logs
-docker-compose logs -f nginx
+# View backend logs
+docker-compose logs -f backend
 
 # View all logs
 docker-compose logs -f
@@ -195,13 +190,12 @@ cp .env backups/env-$(date +%Y%m%d).backup
 
 **4. SSL Certificate Issues:**
 - Verify domain DNS is pointing to server
-- Check certificate files exist in nginx/ssl/
-- Restart nginx: `docker-compose restart nginx`
+- Check Cloudflare SSL settings
 
 ### Performance Optimization
 
 **1. Enable Gzip Compression:**
-- Already configured in nginx.conf
+- Already configured via Cloudflare
 
 **2. Static Asset Caching:**
 - Already configured with 1-year cache headers

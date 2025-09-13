@@ -59,23 +59,7 @@ else
     echo "✅ Certbot already installed"
 fi
 
-# Create SSL directory
-echo "🔒 Setting up SSL directory..."
-mkdir -p nginx/ssl
-
-# Generate SSL certificate
-echo "🔒 Generating SSL certificate for $DOMAIN..."
-sudo certbot certonly --standalone -d $DOMAIN --email $EMAIL --agree-tos --non-interactive
-
-# Copy certificates
-echo "🔒 Copying SSL certificates..."
-sudo cp /etc/letsencrypt/live/$DOMAIN/fullchain.pem nginx/ssl/cert.pem
-sudo cp /etc/letsencrypt/live/$DOMAIN/privkey.pem nginx/ssl/key.pem
-sudo chown $USER:$USER nginx/ssl/*.pem
-
-# Update nginx configuration
-echo "⚙️ Updating nginx configuration..."
-sed -i "s/8bp.epildevconnect.uk/$DOMAIN/g" nginx/nginx.conf
+## SSL certificates and reverse proxy are now managed by Cloudflare
 
 # Update docker-compose.prod.yml
 echo "⚙️ Updating production configuration..."

@@ -6,8 +6,8 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm ci --only=production
+# Install ALL dependencies (including dev dependencies for build)
+RUN npm ci
 
 # Copy source code
 COPY . .
@@ -20,32 +20,28 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-# Install production dependencies
+# Install curl for health checks
+RUN apk add --no-cache curl
+
+# Install production dependencies only
 COPY package*.json ./
 RUN npm ci --only=production && npm cache clean --force
 
-# Copy built application
+# Copy built application from builder stage
 COPY --from=builder /app/dist ./dist
 
 # Create data directory
 RUN mkdir -p /app/data
 
-# Create non-root user
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nodejs -u 1001
-
-# Change ownership of the app directory
-RUN chown -R nodejs:nodejs /app
-USER nodejs
+# Use existing node user (already exists in node:18-alpine)
+USER node
 
 # Expose port
 EXPOSE 1002
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD node -e "require('http').get('http://localhost:1002/api/health', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })"
+  CMD curl -f http://localhost:1002/api/health || exit 1
 
 # Start the application
 CMD ["node", "dist/index.js"]
-
-
