@@ -120,3 +120,8 @@ echo "   Update: git pull && docker-compose -f docker-compose.prod.yml up --buil
 echo ""
 echo "🔒 SSL certificate will auto-renew via cron job"
 echo "📧 Don't forget to configure your SMTP settings in .env"
+
+
+
+
+

@@ -10,7 +10,7 @@ export default defineConfig({
     },
   },
   server: {
-    port: parseInt(process.env.VITE_LOCALHOST_FE || '1001'),
+    port: 100,
     host: true
   },
   build: {
@@ -18,5 +18,3 @@ export default defineConfig({
     sourcemap: true
   }
 })
-
-

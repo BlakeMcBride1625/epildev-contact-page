@@ -33,8 +33,8 @@ npm run dev
 ```
 
 **Access Points:**
-- Frontend: http://localhost:${localhost_fe:-1001}
-- Backend API: http://localhost:${localhost_be:-1002}
+- Frontend: http://localhost:${localhost_fe:-100}
+- Backend API: http://localhost:${localhost_be:-200}
 
 ### 3. Production with Docker
 
@@ -179,13 +179,13 @@ cp .env backups/env-$(date +%Y%m%d).backup
 - Check Gmail app password is correct
 
 **2. Frontend Not Loading:**
-- Check if backend is running on port ${localhost_be:-1002}
+- Check if backend is running on port ${localhost_be:-200}
 - Verify CORS settings
 - Check browser console for errors
 
 **3. Docker Issues:**
 - Ensure Docker and Docker Compose are installed
-- Check if ports 80, 443, ${localhost_fe:-1001}, ${localhost_be:-1002} are available
+- Check if ports 80, 443, ${localhost_fe:-100}, ${localhost_be:-200} are available
 - Run `docker-compose down` and `docker-compose up --build`
 
 **4. SSL Certificate Issues:**

@@ -46,8 +46,8 @@ A quantum-inspired futuristic contact page built with React, Node.js, and advanc
    ```
 
    This will start:
-   - Frontend: http://localhost:${localhost_fe:-1001}
-   - Backend: http://localhost:${localhost_be:-1002}
+   - Frontend: http://localhost:${localhost_fe:-100}
+   - Backend: http://localhost:${localhost_be:-200}
 
 ### Docker Setup
 
@@ -57,8 +57,8 @@ A quantum-inspired futuristic contact page built with React, Node.js, and advanc
    ```
 
 2. **Access the application:**
-   - Frontend: http://localhost:${localhost_fe:-1001}
-   - Backend API: http://localhost:${localhost_be:-1002}
+   - Frontend: http://localhost:${localhost_fe:-100}
+   - Backend API: http://localhost:${localhost_be:-200}
 
 ## 📁 Project Structure
 

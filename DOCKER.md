@@ -55,8 +55,8 @@ This document explains how to run the EpilDev Contact Page application using Doc
 The application runs in a single container with both services:
 
 ### Unified Application Container
-- **Frontend Port:** 1001 (nginx serving React app)
-- **Backend Port:** 1002 (Express API)
+- **Frontend Port:** 100 (nginx serving React app)
+- **Backend Port:** 200 (Express API)
 - **Technology Stack:**
   - Frontend: React + Vite + Nginx
   - Backend: Node.js 18 + Express + TypeScript
@@ -70,9 +70,9 @@ Required environment variables in `.env`:
 
 ```env
 # Server Configuration
-PORT=1002
+PORT=200
 NODE_ENV=development
-FRONTEND_URL=http://localhost:1001
+FRONTEND_URL=http://localhost:100
 
 # Email Configuration
 SMTP_HOST=smtp.gmail.com
@@ -90,10 +90,10 @@ RATE_LIMIT_MAX_REQUESTS=5
 
 ## Accessing the Application
 
-- **Frontend:** http://localhost:1001
-- **Backend API:** http://localhost:1002
-- **API via Frontend:** http://localhost:1001/api (proxied to backend)
-- **Health Check:** http://localhost:1001/health
+- **Frontend:** http://localhost:100
+- **Backend API:** http://localhost:200
+- **API via Frontend:** http://localhost:100/api (proxied to backend)
+- **Health Check:** http://localhost:100/health
 
 ## Troubleshooting
 
@@ -102,8 +102,8 @@ RATE_LIMIT_MAX_REQUESTS=5
 1. **Port already in use:**
    ```bash
    # Check what's using the port
-   lsof -i :1001
-   lsof -i :1002
+   lsof -i :100
+   lsof -i :200
    
    # Stop conflicting services or change ports in docker-compose.yml
    ```

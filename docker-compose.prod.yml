@@ -7,12 +7,12 @@ services:
       dockerfile: Dockerfile
     container_name: epildev-app-prod
     ports:
-      - "1001:80"    # Frontend (nginx)
-      - "1002:1002"  # Backend API
+      - "100:80"    # Frontend (nginx) - Cloudflare will access on port 100
+      - "200:200"   # Backend API - Cloudflare will access on port 200
     environment:
       - NODE_ENV=production
-      - PORT=1002
-      - FRONTEND_URL=http://localhost:1001
+      - PORT=200
+      - FRONTEND_URL=http://localhost:100
     env_file:
       - .env
     volumes:

@@ -10,7 +10,7 @@ import { EmailService } from './services/emailService'
 dotenv.config({ path: '../.env' })
 
 const app = express()
-const PORT = process.env.LOCALHOST_BE || process.env.PORT || 1002
+const PORT = process.env.LOCALHOST_BE || process.env.PORT || 200
 
 // Security middleware
 app.use(helmet({
@@ -26,7 +26,7 @@ app.use(helmet({
 
 // CORS configuration
 app.use(cors({
-  origin: process.env.FRONTEND_URL || `http://localhost:${process.env.LOCALHOST_FE || 1001}`,
+  origin: process.env.FRONTEND_URL || `http://localhost:${process.env.LOCALHOST_FE || 100}`,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],

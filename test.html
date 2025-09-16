@@ -62,19 +62,19 @@
         
         <div class="status">
             <h2>Links</h2>
-            <a href="http://localhost:1001" style="color: #00ffff; margin: 10px;">Frontend (React App)</a><br>
-            <a href="http://localhost:1002/api/health" style="color: #00ffff; margin: 10px;">Backend API Health</a>
+            <a href="http://localhost:100" style="color: #00ffff; margin: 10px;">Frontend (React App)</a><br>
+            <a href="http://localhost:200/api/health" style="color: #00ffff; margin: 10px;">Backend API Health</a>
         </div>
     </div>
 
     <script>
         // Get ports from environment or use defaults
-        const frontendPort = window.localhost_fe || 1001;
-        const backendPort = window.localhost_be || 1002;
-        
+        const frontendPort = window.localhost_fe || 100;
+        const backendPort = window.localhost_be || 200;
+
         // Update links to use dynamic ports
-        document.querySelector('a[href*="localhost:1001"]').href = `http://localhost:${frontendPort}`;
-        document.querySelector('a[href*="localhost:1002"]').href = `http://localhost:${backendPort}/api/health`;
+        document.querySelector('a[href*="localhost:100"]').href = `http://localhost:${frontendPort}`;
+        document.querySelector('a[href*="localhost:200"]').href = `http://localhost:${backendPort}/api/health`;
         
         // Test frontend
         fetch(`http://localhost:${frontendPort}`)
