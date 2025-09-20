@@ -109,10 +109,10 @@ const ContactInfo = () => {
                 [ENCRYPTED]
               </div>
               <a
-                href="mailto:legal@epildevconnect.uk"
+                href="mailto:connectwithme@epildevconnect.uk"
                 className="absolute inset-0 text-quantum-cyan hover:text-quantum-orange transition-colors duration-300 font-mono text-sm opacity-0 group-hover:opacity-100 transition-all duration-500 whitespace-nowrap bg-quantum-violet/30 flex items-center"
               >
-                legal@epildevconnect.uk
+                connectwithme@epildevconnect.uk
               </a>
             </div>
             <div className="ml-auto status-indicator flex-shrink-0">
@@ -155,8 +155,8 @@ const ContactInfo = () => {
           transition={{ delay: 0.4 }}
           className="space-y-4"
         >
-          <h3 className="text-quantum-cyan font-semibold text-lg">Follow Me</h3>
-          <div className="grid grid-cols-2 gap-4">
+          <h3 className="text-quantum-cyan font-semibold text-xl mb-6">Follow Me</h3>
+          <div className="grid grid-cols-2 gap-6">
             {socialLinks.map((social, index) => {
               const IconComponent = social.icon === 'discord' ? DiscordIcon :
                                   social.icon === 'instagram' ? InstagramIcon :
@@ -174,18 +174,18 @@ const ContactInfo = () => {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.5 + index * 0.1 }}
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ scale: 1.08, y: -2 }}
                   whileTap={{ scale: 0.95 }}
-                  className={`p-4 bg-quantum-violet/30 rounded-lg border border-quantum-cyan/20 hover:border-quantum-cyan/50 transition-all duration-300 group ${social.color} hover:shadow-lg hover:shadow-current/20 min-h-[60px]`}
+                  className={`p-6 bg-quantum-violet/30 rounded-xl border-2 border-quantum-cyan/20 hover:border-quantum-cyan/60 transition-all duration-300 group ${social.color} hover:shadow-2xl hover:shadow-current/30 min-h-[80px] backdrop-blur-sm`}
                 >
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center justify-center gap-3 h-full">
                     {IconComponent && (
-                      <IconComponent className="w-6 h-6 text-quantum-electric group-hover:text-current transition-colors duration-300" />
+                      <IconComponent className="w-8 h-8 text-quantum-electric group-hover:text-current transition-colors duration-300" />
                     )}
-                    <span className="text-quantum-electric group-hover:text-current transition-colors duration-300">
+                    <span className="text-quantum-electric group-hover:text-current transition-colors duration-300 font-medium text-lg">
                       {social.name}
                     </span>
-                    <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <ExternalLink className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
                 </motion.a>
               )

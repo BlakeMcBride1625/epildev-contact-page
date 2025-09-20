@@ -7,13 +7,16 @@ services:
       dockerfile: Dockerfile
     container_name: epildev-app-prod
     ports:
-      - "100:80"    # Frontend (nginx) - Cloudflare will access on port 100
+      - "100:80"    # Frontend 1 (nginx) - Cloudflare will access on port 100
+      - "300:80"    # Frontend 2 (nginx) - Cloudflare will access on port 300
       - "200:200"   # Backend API - Cloudflare will access on port 200
     environment:
       - NODE_ENV=production
       - PORT=200
-      - FRONTEND_URL=https://8bp.epildevconnect.uk
-      - CORS_ORIGINS=https://8bp.epildevconnect.uk,http://8bp.epildevconnect.uk,https://epildevconnect.uk,http://epildevconnect.uk
+      - FRONTEND_URL=https://${FRONTEND_DOMAIN_1}
+      - FRONTEND_DOMAIN_1=${FRONTEND_DOMAIN_1}
+      - FRONTEND_DOMAIN_2=${FRONTEND_DOMAIN_2}
+      - CORS_ORIGINS=https://${FRONTEND_DOMAIN_1},http://${FRONTEND_DOMAIN_1},https://${FRONTEND_DOMAIN_2},http://${FRONTEND_DOMAIN_2},https://epildevconnect.uk,http://epildevconnect.uk,https://${API_ENDPOINTS},http://${API_ENDPOINTS}
     env_file:
       - .env
     volumes:

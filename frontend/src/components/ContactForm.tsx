@@ -3,22 +3,23 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { motion } from 'framer-motion'
-import { Mail, Send, User, MessageSquare, FileText } from 'lucide-react'
+import { Mail, Send, User, MessageSquare, FileText, Upload, X } from 'lucide-react'
 import { toast } from 'react-hot-toast'
 import { createRipple } from '@/lib/utils'
 import { ContactFormData, ContactResponse } from '@/types'
 
 const contactSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters'),
-  email: z.string().email('Please enter a valid email address'),
+  name: z.string().min(1, 'Name is required').min(2, 'Name must be at least 2 characters'),
+  email: z.string().min(1, 'Email is required').email('Please enter a valid email address'),
   subject: z.string().optional(),
-  message: z.string().min(10, 'Message must be at least 10 characters')
+  message: z.string().min(1, 'Message is required').min(10, 'Message must be at least 10 characters')
 })
 
 const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
   const [ticketId, setTicketId] = useState('')
+  const [selectedFile, setSelectedFile] = useState<File | null>(null)
 
   const {
     register,
@@ -27,37 +28,83 @@ const ContactForm = () => {
     reset,
     watch
   } = useForm<ContactFormData>({
-    resolver: zodResolver(contactSchema)
+    resolver: zodResolver(contactSchema),
+    mode: 'onSubmit'
   })
 
   const watchedFields = watch()
+  
+  // Debug: Log form state
+  console.log('Watched fields:', watchedFields)
+  console.log('Form errors:', errors)
+
+  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (file) {
+      // Check file size (max 10MB)
+      if (file.size > 10 * 1024 * 1024) {
+        toast.error('File size must be less than 10MB')
+        return
+      }
+      setSelectedFile(file)
+    }
+  }
+
+  const removeFile = () => {
+    setSelectedFile(null)
+  }
 
   const onSubmit = async (data: ContactFormData) => {
+    console.log('Form submitted with data:', data)
+    console.log('Form errors:', errors)
     setIsSubmitting(true)
     
     try {
       // Support both HTTP and HTTPS and domain detection
       const protocol = window.location.protocol
       const hostname = window.location.hostname
+      const port = window.location.port
       const isLocalhost = hostname === 'localhost' || hostname === '127.0.0.1'
       
       const backendUrl = import.meta.env.VITE_API_URL || 
         (isLocalhost 
           ? `${protocol}//localhost:200`
-          : `${protocol}//${hostname}:200`)
-      const response = await fetch(`${backendUrl}/api/contact`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      })
+          : `${protocol}//${import.meta.env.VITE_API_ENDPOINT || 'api.config-8bp.epildevconnect.uk/point'}`)
+      
+      let response: Response
+      
+      if (selectedFile) {
+        console.log('Sending FormData with file')
+        // Create FormData for file upload
+        const formData = new FormData()
+        formData.append('name', data.name)
+        formData.append('email', data.email)
+        formData.append('subject', data.subject || '')
+        formData.append('message', data.message)
+        formData.append('file', selectedFile)
+        
+        response = await fetch(`${backendUrl}/api/contact`, {
+          method: 'POST',
+          body: formData,
+        })
+      } else {
+        console.log('Sending JSON without file')
+        // Send JSON for regular form submission
+        response = await fetch(`${backendUrl}/api/contact`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        })
+      }
 
       const result: ContactResponse = await response.json()
 
       if (result.success) {
         setTicketId(result.ticketId || '')
         setShowSuccess(true)
+        setSelectedFile(null)
         reset()
         toast.success('Message sent successfully!')
       } else {
@@ -155,6 +202,59 @@ const ContactForm = () => {
           />
           {errors.message && (
             <p className="text-red-400 text-sm">{errors.message.message}</p>
+          )}
+        </div>
+
+        {/* File Upload Section */}
+        <div className="space-y-2">
+          <label className="flex items-center gap-2 text-quantum-electric font-medium">
+            <Upload className="w-4 h-4" />
+            Attach File (Optional)
+          </label>
+          
+          {!selectedFile ? (
+            <div className="relative">
+              <input
+                type="file"
+                id="file-upload"
+                onChange={handleFileSelect}
+                className="hidden"
+                accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png,.gif,.zip,.rar"
+              />
+              <label
+                htmlFor="file-upload"
+                className="flex items-center justify-center w-full px-4 py-6 bg-quantum-violet/30 border-2 border-dashed border-quantum-cyan/30 rounded-lg text-quantum-electric/70 hover:border-quantum-cyan/50 hover:bg-quantum-violet/40 transition-all duration-300 cursor-pointer"
+              >
+                <div className="text-center">
+                  <Upload className="w-8 h-8 mx-auto mb-2 text-quantum-cyan" />
+                  <p className="text-sm">Click to upload or drag and drop</p>
+                  <p className="text-xs text-quantum-electric/50 mt-1">
+                    PDF, DOC, TXT, Images, Archives (max 10MB)
+                  </p>
+                </div>
+              </label>
+            </div>
+          ) : (
+            <div className="flex items-center justify-between p-4 bg-quantum-violet/30 border border-quantum-cyan/30 rounded-lg">
+              <div className="flex items-center gap-3">
+                <FileText className="w-5 h-5 text-quantum-cyan" />
+                <div>
+                  <p className="text-quantum-electric font-medium">{selectedFile.name}</p>
+                  <p className="text-quantum-electric/50 text-sm">
+                    {(selectedFile.size / 1024 / 1024).toFixed(2)} MB
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={removeFile}
+                className="p-1 hover:bg-red-500/20 rounded transition-colors duration-200"
+                title="Remove file"
+                aria-label="Remove file"
+              >
+                <X className="w-4 h-4 text-red-400" />
+              </button>
+            </div>
           )}
         </div>
 

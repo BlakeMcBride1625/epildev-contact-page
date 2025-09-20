@@ -7,13 +7,16 @@ services:
       dockerfile: Dockerfile
     container_name: epildev-app
     ports:
-      - "100:80"    # Frontend (nginx)
+      - "100:80"    # Frontend 1 (nginx) - Main contact page
+      - "300:80"    # Frontend 2 (nginx) - Management page (same nginx, different port)
       - "200:200"   # Backend API
     environment:
       - NODE_ENV=development
       - PORT=200
       - FRONTEND_URL=http://localhost:100
-      - CORS_ORIGINS=http://localhost:100,https://localhost:100,http://127.0.0.1:100,https://127.0.0.1:100
+      - FRONTEND_DOMAIN_1=localhost
+      - FRONTEND_DOMAIN_2=localhost
+      - CORS_ORIGINS=http://localhost:100,https://localhost:100,http://localhost:300,https://localhost:300,http://127.0.0.1:100,https://127.0.0.1:100,http://127.0.0.1:300,https://127.0.0.1:300
     env_file:
       - .env
     volumes:

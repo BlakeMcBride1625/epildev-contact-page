@@ -50,8 +50,8 @@ COPY --from=backend-builder /app/backend/node_modules ./backend/node_modules
 # Copy built frontend to nginx directory
 COPY --from=frontend-builder /app/frontend/dist /usr/share/nginx/html
 
-# Create nginx configuration
-RUN echo 'events { worker_connections 1024; } http { include /etc/nginx/mime.types; default_type application/octet-stream; access_log /var/log/nginx/access.log; error_log /var/log/nginx/error.log; gzip on; gzip_vary on; gzip_min_length 1024; gzip_types text/plain text/css text/xml text/javascript application/javascript application/xml+rss application/json; server { listen 80; server_name localhost; root /usr/share/nginx/html; index index.html; location / { try_files $uri $uri/ /index.html; } location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg)$ { expires 1y; add_header Cache-Control "public, immutable"; } location /health { access_log off; return 200 "healthy\n"; add_header Content-Type text/plain; } } }' > /etc/nginx/nginx.conf
+# Copy nginx configuration
+COPY nginx.conf /etc/nginx/nginx.conf
 
 # Create startup script
 RUN cat > /app/start.sh << 'EOF'

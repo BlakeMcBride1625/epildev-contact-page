@@ -116,6 +116,10 @@ nginx/ssl/
 *.backup
 *.bak
 
+# Test and debug files
+test-*.js
+debug-*.html
+
 
 
 

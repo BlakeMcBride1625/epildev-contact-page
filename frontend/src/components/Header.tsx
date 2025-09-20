@@ -15,7 +15,7 @@ const Header = () => {
         transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
         className="flex items-center justify-center gap-3 mb-6"
       >
-        <Rocket className="w-10 h-10 md:w-12 md:h-12 text-quantum-cyan animate-pulse transform translate-y-6" />
+        <Rocket className="w-10 h-10 md:w-12 md:h-12 text-quantum-cyan animate-pulse" />
         <h1 className="text-4xl md:text-5xl font-bold holographic-text leading-tight">
           Epildevconnect
         </h1>
@@ -27,7 +27,7 @@ const Header = () => {
         transition={{ delay: 0.4 }}
         className="text-3xl md:text-4xl font-bold text-quantum-electric mb-4"
       >
-        Connect with the Future
+        Get In Touch
       </motion.h2>
       
       <motion.p
@@ -36,7 +36,7 @@ const Header = () => {
         transition={{ delay: 0.6 }}
         className="text-quantum-electric/70 text-lg max-w-2xl mx-auto"
       >
-        Connect with the future of content creation and development.
+        Ready to start a conversation? Drop me a message and let's connect.
       </motion.p>
     </motion.header>
   )
