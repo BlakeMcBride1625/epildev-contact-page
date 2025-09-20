@@ -54,7 +54,23 @@ COPY --from=frontend-builder /app/frontend/dist /usr/share/nginx/html
 RUN echo 'events { worker_connections 1024; } http { include /etc/nginx/mime.types; default_type application/octet-stream; access_log /var/log/nginx/access.log; error_log /var/log/nginx/error.log; gzip on; gzip_vary on; gzip_min_length 1024; gzip_types text/plain text/css text/xml text/javascript application/javascript application/xml+rss application/json; server { listen 80; server_name localhost; root /usr/share/nginx/html; index index.html; location / { try_files $uri $uri/ /index.html; } location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg)$ { expires 1y; add_header Cache-Control "public, immutable"; } location /health { access_log off; return 200 "healthy\n"; add_header Content-Type text/plain; } } }' > /etc/nginx/nginx.conf
 
 # Create startup script
-RUN echo '#!/bin/sh\n\n# Start nginx in background\nnginx -g "daemon off;" &\n\n# Start backend\ncd /app/backend\nPORT=200 node dist/index.js &\n\n# Wait for any process to exit\nwait' > /app/start.sh
+RUN cat > /app/start.sh << 'EOF'
+#!/bin/sh
+
+echo "🚀 Starting EpilDev Contact Page..."
+
+# Start nginx in background
+echo "🌐 Starting nginx..."
+nginx -g "daemon off;" &
+
+# Start backend
+echo "🔧 Starting backend..."
+cd /app/backend
+PORT=200 node dist/index.js &
+
+# Wait for any process to exit
+wait
+EOF
 
 RUN chmod +x /app/start.sh
 
