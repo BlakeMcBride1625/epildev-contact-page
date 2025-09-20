@@ -14,7 +14,7 @@ export interface ContactResponse {
 export interface SocialLink {
   name: string
   url: string
-  icon: 'discord' | 'instagram' | 'tiktok' | 'facebook'
+  icon: 'discord' | 'instagram' | 'tiktok' | 'facebook' | 'youtube' | 'twitter'
   color: string
 }
 
