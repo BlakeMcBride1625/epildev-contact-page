@@ -26,7 +26,14 @@ app.use(helmet({
 
 // CORS configuration
 app.use(cors({
-  origin: process.env.FRONTEND_URL || `http://localhost:${process.env.LOCALHOST_FE || 100}`,
+  origin: [
+    process.env.FRONTEND_URL || `http://localhost:${process.env.LOCALHOST_FE || 100}`,
+    `https://localhost:${process.env.LOCALHOST_FE || 100}`,
+    'http://localhost:100',
+    'https://localhost:100',
+    'http://127.0.0.1:100',
+    'https://127.0.0.1:100'
+  ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
