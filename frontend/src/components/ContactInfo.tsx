@@ -56,7 +56,7 @@ const socialLinks: SocialLink[] = [
     name: 'TikTok',
     url: 'https://www.tiktok.com/@epildev',
     icon: 'tiktok',
-    color: 'hover:text-[#000000] hover:bg-[#000000]/10'
+    color: 'hover:text-[#E4405F] hover:bg-gradient-to-r hover:from-[#E4405F]/20 hover:to-[#00F2EA]/20'
   },
   {
     name: 'Facebook',
