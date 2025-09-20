@@ -81,7 +81,7 @@ const Footer = () => {
                   <strong>Phone:</strong> +44 07777 943 997
                 </p>
                 <p className="text-sm">
-                  <strong>Email:</strong> connectwithme@epildevconnect.uk
+                  <strong>Email:</strong> legal@epildevconnect.uk
                 </p>
               </div>
             </div>
@@ -116,7 +116,7 @@ const Footer = () => {
                   <ExternalLink className="w-3 h-3" />
                 </Link>
                 <a 
-                  href="mailto:connectwithme@epildevconnect.uk?subject=Data Retention Inquiry" 
+                  href="mailto:legal@epildevconnect.uk?subject=Data Retention Inquiry" 
                   className="flex items-center gap-1 text-quantum-cyan hover:text-quantum-electric transition-colors"
                 >
                   <FileText className="w-4 h-4" />
@@ -126,7 +126,7 @@ const Footer = () => {
               </div>
               
               <div className="text-sm text-quantum-electric/60">
-                © 2024 EpilDev. All rights reserved.
+                © 2025 EpilDev. All rights reserved.
               </div>
             </div>
           </div>

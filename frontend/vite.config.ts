@@ -11,7 +11,9 @@ export default defineConfig({
   },
   server: {
     port: 100,
-    host: true
+    host: true,
+    https: false, // Set to true if you want HTTPS in development
+    cors: true
   },
   build: {
     outDir: 'dist',

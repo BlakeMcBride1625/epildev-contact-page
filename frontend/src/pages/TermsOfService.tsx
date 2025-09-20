@@ -142,7 +142,7 @@ const TermsOfService = () => {
                 If you have any questions about these Terms of Service, please contact us:
               </p>
               <div className="space-y-2 text-quantum-electric/80">
-                <p><strong>Email:</strong> connectwithme@epildevconnect.uk</p>
+                <p><strong>Email:</strong> legal@epildevconnect.uk</p>
                 <p><strong>Phone:</strong> +44 07777 943 997</p>
                 <p><strong>Business Hours:</strong> Monday - Friday, 9:00 AM - 5:30 PM GMT</p>
               </div>

@@ -36,7 +36,10 @@ const ContactForm = () => {
     setIsSubmitting(true)
     
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:200'}/api/contact`, {
+      // Support both HTTP and HTTPS
+      const protocol = window.location.protocol
+      const backendUrl = import.meta.env.VITE_API_URL || `${protocol}//localhost:200`
+      const response = await fetch(`${backendUrl}/api/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -155,7 +158,7 @@ const ContactForm = () => {
           onClick={(e) => createRipple(e)}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          className={`w-full py-4 px-6 bg-gradient-to-r from-quantum-cyan via-quantum-purple to-quantum-orange text-quantum-black font-bold rounded-lg shadow-lg hover:shadow-quantum-cyan/50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden`}
+          className={`w-full py-3 px-6 bg-gradient-to-r from-quantum-cyan via-quantum-purple to-quantum-orange text-quantum-black font-bold rounded-lg shadow-lg hover:shadow-quantum-cyan/50 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden`}
         >
           {isSubmitting ? (
             <div className="flex items-center justify-center gap-2">

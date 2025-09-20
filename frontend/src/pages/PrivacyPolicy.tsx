@@ -128,7 +128,7 @@ const PrivacyPolicy = () => {
                 If you have any questions about this Privacy Policy or our data practices, please contact us:
               </p>
               <div className="space-y-2 text-quantum-electric/80">
-                <p><strong>Email:</strong> connectwithme@epildevconnect.uk</p>
+                <p><strong>Email:</strong> legal@epildevconnect.uk</p>
                 <p><strong>Phone:</strong> +44 07777 943 997</p>
                 <p><strong>Response Time:</strong> Within 24 hours on weekdays</p>
               </div>

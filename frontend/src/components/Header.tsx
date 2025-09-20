@@ -15,9 +15,9 @@ const Header = () => {
         transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
         className="flex items-center justify-center gap-3 mb-6"
       >
-        <Rocket className="w-8 h-8 text-quantum-cyan animate-pulse" />
-        <h1 className="text-4xl md:text-5xl font-bold holographic-text">
-          EpilDev
+        <Rocket className="w-10 h-10 md:w-12 md:h-12 text-quantum-cyan animate-pulse transform translate-y-6" />
+        <h1 className="text-4xl md:text-5xl font-bold holographic-text leading-tight">
+          Epildevconnect
         </h1>
       </motion.div>
       

@@ -27,6 +27,18 @@ const FacebookIcon = ({ className }: { className?: string }) => (
   </svg>
 )
 
+const YouTubeIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+  </svg>
+)
+
+const TwitterIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+  </svg>
+)
+
 const socialLinks: SocialLink[] = [
   {
     name: 'Discord',
@@ -51,6 +63,18 @@ const socialLinks: SocialLink[] = [
     url: 'https://www.facebook.com/AD.Blake.Evan.McBride',
     icon: 'facebook',
     color: 'hover:text-[#1877F2] hover:bg-[#1877F2]/10'
+  },
+  {
+    name: 'YouTube',
+    url: 'https://www.youtube.com/@Epildev',
+    icon: 'youtube',
+    color: 'hover:text-[#FF0000] hover:bg-[#FF0000]/10'
+  },
+  {
+    name: 'X',
+    url: 'https://x.com/epildev_ad?s=21',
+    icon: 'twitter',
+    color: 'hover:text-[#000000] hover:bg-[#000000]/10'
   }
 ]
 
@@ -85,10 +109,10 @@ const ContactInfo = () => {
                 [ENCRYPTED]
               </div>
               <a
-                href="mailto:connectwithme@epildevconnect.uk"
+                href="mailto:legal@epildevconnect.uk"
                 className="absolute inset-0 text-quantum-cyan hover:text-quantum-orange transition-colors duration-300 font-mono text-sm opacity-0 group-hover:opacity-100 transition-all duration-500 whitespace-nowrap bg-quantum-violet/30 flex items-center"
               >
-                connectwithme@epildevconnect.uk
+                legal@epildevconnect.uk
               </a>
             </div>
             <div className="ml-auto status-indicator flex-shrink-0">
@@ -132,12 +156,14 @@ const ContactInfo = () => {
           className="space-y-4"
         >
           <h3 className="text-quantum-cyan font-semibold text-lg">Follow Me</h3>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-4">
             {socialLinks.map((social, index) => {
               const IconComponent = social.icon === 'discord' ? DiscordIcon :
                                   social.icon === 'instagram' ? InstagramIcon :
                                   social.icon === 'tiktok' ? TikTokIcon :
-                                  social.icon === 'facebook' ? FacebookIcon : null
+                                  social.icon === 'facebook' ? FacebookIcon :
+                                  social.icon === 'youtube' ? YouTubeIcon :
+                                  social.icon === 'twitter' ? TwitterIcon : null
 
               return (
                 <motion.a
@@ -150,11 +176,11 @@ const ContactInfo = () => {
                   transition={{ delay: 0.5 + index * 0.1 }}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className={`p-3 bg-quantum-violet/30 rounded-lg border border-quantum-cyan/20 hover:border-quantum-cyan/50 transition-all duration-300 group ${social.color} hover:shadow-lg hover:shadow-current/20`}
+                  className={`p-4 bg-quantum-violet/30 rounded-lg border border-quantum-cyan/20 hover:border-quantum-cyan/50 transition-all duration-300 group ${social.color} hover:shadow-lg hover:shadow-current/20 min-h-[60px]`}
                 >
                   <div className="flex items-center gap-2">
                     {IconComponent && (
-                      <IconComponent className="w-5 h-5 text-quantum-electric group-hover:text-current transition-colors duration-300" />
+                      <IconComponent className="w-6 h-6 text-quantum-electric group-hover:text-current transition-colors duration-300" />
                     )}
                     <span className="text-quantum-electric group-hover:text-current transition-colors duration-300">
                       {social.name}
