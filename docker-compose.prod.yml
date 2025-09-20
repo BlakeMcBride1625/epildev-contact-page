@@ -13,6 +13,7 @@ services:
       - NODE_ENV=production
       - PORT=200
       - FRONTEND_URL=http://localhost:100
+      - CORS_ORIGINS=https://8bp.epildevconnect.uk,http://8bp.epildevconnect.uk,https://epildevconnect.uk,http://epildevconnect.uk
     env_file:
       - .env
     volumes:

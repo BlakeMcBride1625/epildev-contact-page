@@ -13,6 +13,7 @@ services:
       - NODE_ENV=development
       - PORT=200
       - FRONTEND_URL=http://localhost:100
+      - CORS_ORIGINS=http://localhost:100,https://localhost:100,http://127.0.0.1:100,https://127.0.0.1:100
     env_file:
       - .env
     volumes:
