@@ -36,9 +36,15 @@ const ContactForm = () => {
     setIsSubmitting(true)
     
     try {
-      // Support both HTTP and HTTPS
+      // Support both HTTP and HTTPS and domain detection
       const protocol = window.location.protocol
-      const backendUrl = import.meta.env.VITE_API_URL || `${protocol}//localhost:200`
+      const hostname = window.location.hostname
+      const isLocalhost = hostname === 'localhost' || hostname === '127.0.0.1'
+      
+      const backendUrl = import.meta.env.VITE_API_URL || 
+        (isLocalhost 
+          ? `${protocol}//localhost:200`
+          : `${protocol}//${hostname}:200`)
       const response = await fetch(`${backendUrl}/api/contact`, {
         method: 'POST',
         headers: {
