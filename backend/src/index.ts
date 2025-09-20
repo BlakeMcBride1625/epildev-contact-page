@@ -56,14 +56,9 @@ app.set('trust proxy', true)
 // Routes
 app.use('/api', contactRoutes)
 
-// Root endpoint
+// Root endpoint - redirect to contact page
 app.get('/', (req, res) => {
-  res.json({
-    message: 'EpilDev Contact API',
-    version: '1.0.0',
-    status: 'running',
-    timestamp: new Date().toISOString(),
-  })
+  res.redirect('/contact')
 })
 
 // 404 handler
