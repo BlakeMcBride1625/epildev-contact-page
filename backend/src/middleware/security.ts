@@ -6,7 +6,7 @@ export const rateLimiter = (req: Request, res: Response, next: NextFunction): vo
   const clientIp = req.ip || req.connection.remoteAddress
   const now = Date.now()
   const windowMs = 15 * 60 * 1000 // 15 minutes
-  const maxRequests = 5
+  const maxRequests = process.env.NODE_ENV === 'development' ? 50 : 5
 
   if (!global.rateLimitStore) {
     global.rateLimitStore = new Map()

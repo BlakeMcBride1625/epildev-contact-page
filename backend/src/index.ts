@@ -33,7 +33,13 @@ const corsOrigins = process.env.CORS_ORIGINS
       'http://localhost:100',
       'https://localhost:100',
       'http://127.0.0.1:100',
-      'https://127.0.0.1:100'
+      'https://127.0.0.1:100',
+      process.env.FRONTEND_DOMAIN_1 ? `https://${process.env.FRONTEND_DOMAIN_1}` : 'https://8bp.epildevconnect.uk',
+      process.env.FRONTEND_DOMAIN_1 ? `http://${process.env.FRONTEND_DOMAIN_1}` : 'http://8bp.epildevconnect.uk',
+      process.env.FRONTEND_DOMAIN_2 ? `https://${process.env.FRONTEND_DOMAIN_2}` : 'https://8bp.management.epildevconnect.uk',
+      process.env.FRONTEND_DOMAIN_2 ? `http://${process.env.FRONTEND_DOMAIN_2}` : 'http://8bp.management.epildevconnect.uk',
+      process.env.API_ENDPOINTS ? `https://${process.env.API_ENDPOINTS}` : 'https://api.config-8bp.epildevconnect.uk/point',
+      process.env.API_ENDPOINTS ? `http://${process.env.API_ENDPOINTS}` : 'http://api.config-8bp.epildevconnect.uk/point'
     ]
 
 app.use(cors({
@@ -58,7 +64,9 @@ app.use('/api', contactRoutes)
 
 // Root endpoint - redirect to contact page
 app.get('/', (req, res) => {
-  res.redirect('/contact')
+  const frontendDomain1 = process.env.FRONTEND_DOMAIN_1 || '8bp.epildevconnect.uk'
+  const protocol = req.secure ? 'https' : 'http'
+  res.redirect(`${protocol}://${frontendDomain1}/contact`)
 })
 
 // 404 handler

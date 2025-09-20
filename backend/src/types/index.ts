@@ -11,11 +11,19 @@ export interface ContactResponse {
   message: string
 }
 
+export interface Attachment {
+  filename: string
+  path: string
+  size: number
+  mimetype: string
+}
+
 export interface TicketData extends ContactFormData {
   id: string
   timestamp: Date
   ipAddress?: string
   userAgent?: string
+  attachment?: Attachment
 }
 
 export interface EmailTemplate {

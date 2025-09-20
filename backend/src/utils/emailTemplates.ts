@@ -97,22 +97,47 @@ export const generateConfirmationEmail = (ticketData: TicketData): EmailTemplate
                 border-top: 1px solid rgba(0, 255, 255, 0.2);
             }
             .social-links {
-                margin: 20px 0;
+                margin: 30px 0;
+                text-align: center;
+            }
+            .social-links h3 {
+                margin: 0 0 20px 0;
+                color: #00ffff;
+                font-size: 18px;
+                font-weight: 600;
+            }
+            .social-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 15px;
+                max-width: 400px;
+                margin: 0 auto;
             }
             .social-links a {
-                display: inline-block;
-                margin: 0 10px;
-                padding: 10px 20px;
-                background: rgba(0, 255, 255, 0.1);
-                border: 1px solid rgba(0, 255, 255, 0.3);
-                border-radius: 25px;
+                display: block;
+                padding: 12px 16px;
+                background: rgba(0, 255, 255, 0.08);
+                border: 1px solid rgba(0, 255, 255, 0.25);
+                border-radius: 12px;
                 color: #00ffff;
                 text-decoration: none;
+                font-size: 14px;
+                font-weight: 500;
+                text-align: center;
                 transition: all 0.3s ease;
+                box-shadow: 0 2px 8px rgba(0, 255, 255, 0.1);
             }
             .social-links a:hover {
-                background: rgba(0, 255, 255, 0.2);
-                box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+                background: rgba(0, 255, 255, 0.15);
+                border-color: rgba(0, 255, 255, 0.5);
+                box-shadow: 0 4px 16px rgba(0, 255, 255, 0.2);
+                transform: translateY(-2px);
+            }
+            @media (max-width: 480px) {
+                .social-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 12px;
+                }
             }
         </style>
     </head>
@@ -146,11 +171,15 @@ export const generateConfirmationEmail = (ticketData: TicketData): EmailTemplate
                 </div>
                 
                 <div class="social-links">
-                    <p>Stay connected:</p>
-                    <a href="https://discord.gg/qG59XaRWnf">Discord</a>
-                    <a href="https://www.instagram.com/adb.epildev">Instagram</a>
-                    <a href="https://www.tiktok.com/@epildev">TikTok</a>
-                    <a href="https://www.facebook.com/AD.Blake.Evan.McBride">Facebook</a>
+                    <h3>Stay Connected</h3>
+                    <div class="social-grid">
+                        <a href="https://discord.gg/qG59XaRWnf">Discord</a>
+                        <a href="https://www.instagram.com/adb.epildev">Instagram</a>
+                        <a href="https://www.tiktok.com/@epildev">TikTok</a>
+                        <a href="https://www.facebook.com/AD.Blake.Evan.McBride">Facebook</a>
+                        <a href="https://www.youtube.com/@epildev">YouTube</a>
+                        <a href="https://x.com/epildev">X (Twitter)</a>
+                    </div>
                 </div>
             </div>
             
@@ -182,6 +211,8 @@ Stay connected:
 - Instagram: https://www.instagram.com/adb.epildev
 - TikTok: https://www.tiktok.com/@epildev
 - Facebook: https://www.facebook.com/AD.Blake.Evan.McBride
+- YouTube: https://www.youtube.com/@epildev
+- X (Twitter): https://x.com/epildev
 
 © 2024 EpilDev - Connect with the Future
 This is an automated response. Please do not reply to this email.
